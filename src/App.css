@@ -5,12 +5,10 @@
 }
 
 .search-bar {
-}
-
-.search-bar input {
-  height: 2em;
+  padding: .2em;
   width: 95%;
   text-align: center;
+  font-size: 1em;
 }
 
 .card {
@@ -24,8 +22,9 @@
 .search-result-quote {
   padding: 0 .5em 0 .5em;
   margin: 1em 0 0 0;
-  border: 1px solid white;
-  border-radius: 20px;
+  border: 1px solid;
+  box-shadow: 5px 5px 5px #e0b469;
+  border-radius: 10px;
 }
 
 .quote-author {

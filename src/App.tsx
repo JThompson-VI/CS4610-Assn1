@@ -8,26 +8,12 @@ function App() {
   const [randQuote, setRandQuote] = useState<Quote>()
   const [searchRes, setSearchRes] = useState<QuoteSearchResults>()
 
-  const trq: Quote = {
-    // temp filler for useEffect
-    _id: 'p8uhjt',
-    content:
-      'Your real strength comes from being the best you you can be. Who are you? What are you good at? What makes you, you?',
-    author: 'Po',
-    authorSlug: 'Po',
-    length: 116,
-    tags: [],
-  }
-
   useEffect(() => {
-    // fetch(`${quotes_api_url}/random`)
-    //   .then((res) => res.json()) // TODO: check status
-    //   .then((data) => {
-    //     console.log(data)
-    //     setRandQuote(data)
-    //   })
-    console.log('useeffect called')
-    setRandQuote(trq)
+    fetch(`${quotes_api_url}/random`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRandQuote(data)
+      })
   }, [])
 
   const fetchSearchRes = (event: React.FormEvent<HTMLElement>) => {
@@ -35,29 +21,28 @@ function App() {
     event.preventDefault()
 
     if (queryAuthorName === '') {
-      // could set some error state
       return
     }
     fetch(`${quotes_api_url}/search?query=${queryAuthorName}`)
-      .then((res) => res.json()) // check for status
+      .then((res) => res.json())
       .then((data) => {
         console.log(data)
         setSearchRes(data)
       })
   }
 
-  // change App class to deal with screen center thing the body is doing
   return (
     <div className='App'>
       <h1>Quote Search</h1>
       <form onSubmit={fetchSearchRes}>
-        <div className='search-bar'>
+        <div >
           <input
             name='authorname'
             placeholder='Thomas Jefferson'
             autoFocus
             value={queryAuthorName}
             type='search'
+            className='search-bar'
             onChange={(e) => setqueryAuthorName(e.target.value)}
           />
         </div>
@@ -66,7 +51,7 @@ function App() {
         <SearchResults results={searchRes} />
       ) : (
         <>
-          <RandomQuote quote={randQuote} /> {/*rend if no search res*/}
+          <RandomQuote quote={randQuote} />
         </>
       )}
 
@@ -107,4 +92,5 @@ const SearchResults = ({ results: searchResults }: { results?: QuoteSearchResult
     </div>
   )
 }
+
 export default App
