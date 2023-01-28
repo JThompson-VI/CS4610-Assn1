@@ -4,7 +4,7 @@ export type Quote = {
   author: string
   authorSlug: string
   length: number
-  tags: [unknown]
+  tags: []
 }
 
 export type QuoteSearchResults = {
